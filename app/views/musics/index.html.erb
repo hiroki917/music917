@@ -14,3 +14,12 @@
 <% end %>
 <h2>音楽フレーズを投稿する</h2>
 <%= link_to '投稿する', new_music_path %>
+
+<% @musics.each do |music| %>
+<%= music.name%>
+<%= music.phrase%>
+<%= music.text%>
+
+<%= image_tag music.image.variant(resize: '300x300'), class: "item-img" %>
+
+<% end %>
