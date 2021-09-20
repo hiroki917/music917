@@ -1,0 +1,21 @@
+<h1 class = "music-main">好きな音楽お気に入りフレーズを投稿する</h1>
+
+ <%= form_with model: @music , local: true do |f| %>
+ <%= render 'musics/error_messages', model: f.object %> 
+
+<div class = "title">タイトル名</div>
+ <%= f.text_field :name  %>
+
+<div class = "title">自分のフレーズor既存のアーティスト</div>
+ <%= f.text_field :phrase  %>
+
+<div class = "title">音楽の説明orフレーズの説明</div></br>
+ <%= f.text_area :text, placeholder:"説明（必須 100文字まで)", maxlength:"100" %>
+
+<div class= "title">ジャンル</div>
+<%= f.collection_select(:genre_id, Genre.all, :id, :name, {} ) %></br>
+<div class ="submit">
+<%= f.submit "投稿する" ,class:"sell-btn" %></br>
+</div>
+<%=link_to 'もどる', root_path, class:"back-btn" %>
+ <% end %>
