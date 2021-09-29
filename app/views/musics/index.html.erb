@@ -2,7 +2,8 @@
 
 <% if user_signed_in? %>
 
-<%= "#{current_user.last_name}さん"%>こんばんは！
+こんばんは！
+<%= link_to "#{current_user.name}さん", user_path(current_user.id), class: :greeting__link %>
 <ul>
  <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
 </ul>
@@ -13,13 +14,46 @@
 </ul>
 <% end %>
 <h2>音楽フレーズを投稿する</h2>
+<ul class="nav-lists">
+      <li class="list-status">
+        現在のリスト；
+        <span id="current-list">選択されていません</span>
+      </li>
+      <li class="background-red" id="lists">リスト
+      </li>
+      <li>カリキュラム変更</li>
+    </ul>
+    <ul class="show-lists hidden" id="pull-down">
+      <li class="pull-down-list">リスト1</li>
+      <li class="pull-down-list">リスト2</li>
+      <li class="pull-down-list">リスト3</li>
+      <li class="pull-down-list">リスト4</li>
+    </ul> 
 <%= link_to '投稿する', new_music_path %></br>
 
-<% @musics.each do |music| %>
-<%= music.name%>
-<%= music.phrase%>
-<%= music.text%>
+<% @musics.each do |music| %></br>
+<h2>音楽投稿</h2></br>
+<%= link_to '詳細' ,music_path(music.id)  %></br>
 
+<div class ="top-music">
+<div class = "title">タイトル名</div>
+<%= music.name%></br>
+</div>
+
+<div class = "artist">好きなアーティストフレーズ</div>
+<%= music.phrase%></br>
+<%= music.text%></br>
+<button>
+ <%= link_to music.user.name, user_path(music.user), class: :card__user %>
+</button>
 <%= image_tag music.image.variant(resize: '300x300'), class: "item-img" %>
 
 <% end %>
+ 
+ <div class="previews">
+  <div class="slider">
+      <%= image_tag 'home-image' %>
+      <%= image_tag 'sample' %>
+      <%= image_tag 'sample2' %>
+  </div>
+</div>

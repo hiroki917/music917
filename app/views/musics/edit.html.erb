@@ -1,3 +1,4 @@
+投稿の編集
 <h1 class = "music-main">好きな音楽お気に入りフレーズを投稿する</h1>
 
  <%= form_with model: @music , local: true do |f| %>
@@ -17,10 +18,9 @@
 
 <div class = "image">
 <p>好きなフレーズor自作のフレーズ</p >
-<%= f.file_field :image, id: 'message_image'%>
+<%= f.file_field :image, id:"item-image" %>
 </div>
 <div class ="submit">
- <div id="image-list"></div>
 <%= f.submit "投稿する" ,class:"sell-btn" %></br>
 </div>
 <%=link_to 'もどる', root_path, class:"back-btn" %>

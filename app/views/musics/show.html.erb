@@ -1,0 +1,33 @@
+<div class = "wrapper">
+<%= image_tag @music.image.variant(resize: '300x300')%></br>
+<%= @music.name%></br>
+<%= @music.phrase%></br>
+<%= @music.text%></br>
+<%# マイページリンク %>
+ <%= link_to @music.user.name,user_path(@music.user.id), class: :prototype__user %>
+      <% if user_signed_in? && current_user.id == @music.user_id %>
+      <%# (誰の詳細ページ.id) %>
+      <%# プロトタイプの投稿者とログインしているユーザーが同じであれば以下を表示する %>
+        <div class="prototype__manage">
+          <%= link_to "編集する", edit_music_path(@music.id) %>
+          <%= link_to "削除する", music_path(@music.id), method: :delete %>
+        </div>  
+        <% end %>
+    <% if user_signed_in? %>
+      <%= form_with(model: [@music, @comment], local: true) do |form| %>
+        <%= form.text_area :text, placeholder: "コメントする", rows: "2" %>
+        <%= form.submit "SEND" %>
+      <% end %>
+    <% else %>
+      <strong><p>※※※ コメントの投稿には新規登録/ログインが必要です ※※※</p></strong>
+    <% end %>
+  </div>
+</div>
+    <% @comments.each do |comment| %>
+            <li class="comments_list">
+              <%= comment.text%>
+              <%= link_to "（#{comment.user.name}）", user_path(comment.user), class: :comment_user %>
+            </li>
+          <% end %>
+
+<%= link_to "トップページに戻る", root_path %>
